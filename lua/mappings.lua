@@ -91,7 +91,7 @@ map("n", "<leader>K", vim.lsp.buf.hover, { desc = "Show hover" })
 
 nomap("n", "<leader>h") --open horizontal term
 
-local gitsigns = require "gitsigns"
+-- Gitsigns mappings
 -- Normal mode mappings
 map(
   "n",
@@ -179,7 +179,6 @@ map("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
   expr = true,
   replace_keycodes = false,
 })
-vim.g.copilot_no_tab_map = true
 
 -- Accept word
 map("i", "<C-k>", "<Plug>(copilot-accept-word)", { desc = "Accept Copilot word" })
