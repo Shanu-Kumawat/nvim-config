@@ -2,57 +2,7 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        -- Core
-        "bash",
-        "c",
-        "cpp",
-        "lua",
-        "vim",
-        "vimdoc",
-
-        -- Web
-        "html",
-        "css",
-        "javascript",
-        "typescript",
-        "tsx",
-        "json",
-
-        -- Docs & config
-        "markdown",
-        "markdown_inline",
-        "yaml",
-
-        -- Programming
-        "python",
-        "rust",
-
-        -- System
-        "nix",
-        "hyprlang",
-
-        -- Infra
-        "dockerfile",
-        "nginx",
-        "sql",
-
-        -- Internals
-        "query",
-        "printf",
-        "luadoc",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<A-o>",
-          node_incremental = "<A-o>",
-          scope_incremental = false,
-          node_decremental = "<A-i>",
-        },
-      },
-    },
+    opts = require "configs.treesitter",
   },
 
   {
@@ -81,26 +31,9 @@ return {
       { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
       { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
     },
-    keys = {
-      { "<leader>zc", ":CopilotChat<CR>", mode = "n", desc = "Chat with Copilot" },
-      { "<Leader>ze", ":CopilotChatExplain<CR>", mode = "v", desc = "Explain Code" },
-      { "<Leader>zr", ":CopilotChatReview<CR>", mode = "v", desc = "Review Code" },
-      { "<Leader>zf", ":CopilotChatFix<CR>", mode = "v", desc = "Fix Code Issues" },
-      { "<Leader>zo", ":CopilotChatOptimize<CR>", mode = "v", desc = "Optimize Code" },
-      { "<leader>zd", ":CopilotChatDocs<CR>", mode = "v", desc = "Generate Docs" },
-      { "<leader>zt", ":CopilotChatTests<CR>", mode = "v", desc = "Generate Tests" },
-      { "<Leader>zm", ":CopilotChatCommit<CR>", mode = "n", desc = "Generate Commit Message" },
-      { "<leader>zs", ":CopilotChatCommit<CR>", mode = "v", desc = "Generate Commit for Selection" },
-    },
-    opts = {
-      Rename = {
-        prompt = "Please rename the variable correctly in given selection based on context",
-        selection = function(source)
-          local select = require "CopilotChat.select"
-          return select.visual(source)
-        end,
-      },
-    },
+    opts = function()
+      return require "configs.copilot-chat"
+    end,
   },
 
   {
@@ -164,5 +97,34 @@ return {
     config = function()
       require "configs.lspconfig"
     end,
+  },
+
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup(require "configs.surround")
+    end,
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    event = "BufReadPost",
+    opts = require "configs.todo",
+  },
+
+  {
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = require "configs.trouble",
+  },
+
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = require "configs.flash",
   },
 }

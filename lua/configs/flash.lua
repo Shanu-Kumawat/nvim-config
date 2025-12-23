@@ -1,0 +1,22 @@
+return {
+  -- Flash options
+  -- labels = "asdfghjklqwertyuiopzxcvbnm",
+  -- search = {
+  --   -- search/jump in all windows
+  --   multi_window = true,
+  --   -- search direction
+  --   forward = true,
+  --   -- when `false`, find only matches in the given direction
+  --   wrap = true,
+  --   -- Each mode will take ignorecase and smartcase into account.
+  --   -- * exact: exact match
+  --   -- * search: regular search
+  --   -- * fuzzy: fuzzy search
+  --   -- * fun(str): custom search function returns a pattern
+  --   --   For example, to only match at the beginning of a word:
+  --   --   mode = function(str)
+  --   --     return "\\<" .. str
+  --   --   end,
+  --   mode = "exact",
+  -- },
+}
