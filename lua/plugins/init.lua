@@ -37,18 +37,6 @@ return {
   },
 
   {
-    "elixir-tools/elixir-tools.nvim",
-    version = "*",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require "configs.elixir-tools"
-    end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
-
-  {
     "folke/which-key.nvim",
     lazy = false, -- disables lazy loading
   },

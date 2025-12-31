@@ -6,88 +6,59 @@ require("code_runner").setup {
     init = nil,
   },
   filetype = {
+    -- Scripting & Interpreted Languages
+    python = "python3 -u",
+    typescript = "deno run",
+    javascript = "node",
+    lua = "lua",
+    sh = "bash",
+    perl = "perl",
+    ruby = "ruby",
+    php = "php",
+    dart = "dart",
+
+    -- Compiled Languages (Simple)
+    go = "go run",
     java = {
       "cd $dir &&",
       "javac $fileName &&",
       "java $fileNameWithoutExt",
     },
-    python = "python3 -u",
-    typescript = "deno run",
-    edp = "cd $dir && FreeFem++ $fileName",
-    -- Fixed Rust configuration
+
+    -- Smart Configurations
     rust = function()
-      local in_cargo_project = vim.fn.findfile("Cargo.toml", ".;") ~= ""
-      if in_cargo_project then
-        return "cd $dir && cargo run"
-      else
-        return {
-          "cd $dir &&",
-          "rustc $fileName &&",
-          "./$fileNameWithoutExt",
-        }
+      local in_cargo = vim.fn.findfile("Cargo.toml", ".;") ~= ""
+      if in_cargo then
+        return "cargo run"
       end
-    end,
-    -- Elixir configuration
-    elixir = function()
-      local in_phoenix_project = vim.fn.findfile("mix.exs", ".;") ~= ""
-        and vim.fn.system("grep -q phoenix " .. vim.fn.findfile("mix.exs", ".;")) == 0
-      if in_phoenix_project then
-        return "cd $dir && mix phx.server"
-      else
-        return "cd $dir && elixir $fileName"
-      end
-    end,
-    cpp = function()
-      local in_cmake_project = vim.fn.findfile("CMakeLists.txt", ".;") ~= ""
-      if in_cmake_project then
-        return "cd build && cmake .. && make && nvidia-offload ./$fileNameWithoutExt; cd .."
-      else
-        return {
-          "cd $dir &&",
-          "g++ $fileName -o /tmp/$fileNameWithoutExt &&",
-          "/tmp/$fileNameWithoutExt &&",
-          "rm /tmp/$fileNameWithoutExt",
-        }
-      end
-    end,
-    c = function()
-      local c_base = {
+      return {
         "cd $dir &&",
-        "gcc $fileName -o",
-        "/tmp/$fileNameWithoutExt",
+        "rustc $fileName &&",
+        "./$fileNameWithoutExt",
       }
-      local c_exec = {
-        "&& /tmp/$fileNameWithoutExt &&",
+    end,
+
+    cpp = function()
+      local in_cmake = vim.fn.findfile("CMakeLists.txt", ".;") ~= ""
+      if in_cmake then
+        return "mkdir -p build && cd build && cmake .. && make && ./$fileNameWithoutExt"
+      end
+      return {
+        "cd $dir &&",
+        "g++ -std=c++17 $fileName -o /tmp/$fileNameWithoutExt &&",
+        "/tmp/$fileNameWithoutExt &&",
         "rm /tmp/$fileNameWithoutExt",
       }
-      vim.ui.input({ prompt = "Add more args:" }, function(input)
-        c_base[4] = input
-        vim.print(vim.tbl_extend("force", c_base, c_exec))
-        require("code_runner.commands").run_from_fn(vim.list_extend(c_base, c_exec))
-      end)
+    end,
+
+    c = function()
+      return {
+        "cd $dir &&",
+        "gcc $fileName -o /tmp/$fileNameWithoutExt &&",
+        "/tmp/$fileNameWithoutExt &&",
+        "rm /tmp/$fileNameWithoutExt",
+      }
     end,
   },
-  project = {
-    ["~/python/intel_2021_1"] = {
-      name = "Intel Course 2021",
-      description = "Simple python project",
-      file_name = "POO/main.py",
-    },
-    ["~/deno/example"] = {
-      name = "ExapleDeno",
-      description = "Project with deno using other command",
-      file_name = "http/main.ts",
-      command = "deno run --allow-net",
-    },
-    ["~/cpp/example"] = {
-      name = "ExapleCpp",
-      description = "Project with make file",
-      command = "make buid && cd buid/ && ./compiled_file",
-    },
-    ["~/private/.*terraform%-prod.-/.-"] = {
-      name = "ExampleTerraform",
-      description = 'All Folders in ~/private containing "terraform-prod"',
-      command = "terraform plan",
-    },
-  },
+  project = {},
 }
