@@ -85,3 +85,13 @@ autocmd({ "BufLeave", "FocusLost", "InsertEnter", "CmdlineEnter" }, {
     end
   end,
 })
+
+-- Spell checking for writing buffers only (not code)
+autocmd("FileType", {
+  pattern = { "markdown", "gitcommit", "text" },
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = "en_us"
+  end,
+  desc = "Enable spell checking for writing buffers",
+})

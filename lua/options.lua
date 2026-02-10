@@ -10,6 +10,7 @@ o.scrolloff = 7
 -- Search settings
 o.ignorecase = true
 o.smartcase = true
+o.inccommand = "split"
 
 -- UI settings
 o.signcolumn = "yes" -- Always show sign column
