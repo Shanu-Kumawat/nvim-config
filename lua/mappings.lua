@@ -109,6 +109,10 @@ map("n", "<leader>lc", ":lclose<CR>", { desc = "Close location list" })
 --  Plugins
 -- =============================================================================
 
+-- Oil
+map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+
 -- BetterTerm
 nomap("n", "<leader>h") -- Remove default horizontal term map
 map({ "n", "t" }, "<C-;>", function()
@@ -180,11 +184,11 @@ map("n", "<leader>ms", "<Plug>MarkdownPreviewStop", { desc = "Markdown preview s
 map("n", "<leader>mt", "<Plug>MarkdownPreviewToggle", { desc = "Markdown preview toggle" })
 
 -- Trouble
-map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
-map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
-map("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
-map("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
-map("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
+map("n", "<leader>ii", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
+map("n", "<leader>ib", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
+map("n", "<leader>is", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
+map("n", "<leader>il", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
+map("n", "<leader>iq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
 
 -- Todo Comments
 map("n", "]t", function()
@@ -195,5 +199,5 @@ map("n", "[t", function()
   require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
 
-map("n", "<leader>xt", "<cmd>TodoTrouble<cr>", { desc = "Todo (Trouble)" })
+map("n", "<leader>it", "<cmd>TodoTrouble<cr>", { desc = "Todo (Trouble)" })
 map("n", "<leader>st", "<cmd>TodoTelescope<cr>", { desc = "Todo (Telescope)" })

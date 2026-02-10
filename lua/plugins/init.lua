@@ -115,4 +115,13 @@ return {
     event = "VeryLazy",
     opts = require "configs.flash",
   },
+
+  {
+    "stevearc/oil.nvim",
+    lazy = false,
+    config = function()
+      require "configs.oil"
+    end,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
 }
