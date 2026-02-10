@@ -112,6 +112,27 @@ map("n", "<leader>lc", ":lclose<CR>", { desc = "Close location list" })
 -- Oil
 map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
+-- Harpoon
+local harpoon = require "harpoon"
+map("n", "<leader>a", function()
+  harpoon:list():add()
+end, { desc = "Harpoon: Add file" })
+map("n", "<C-e>", function()
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end, { desc = "Harpoon: Toggle menu" })
+
+map("n", "<C-1>", function()
+  harpoon:list():select(1)
+end, { desc = "Harpoon: Select 1" })
+map("n", "<C-2>", function()
+  harpoon:list():select(2)
+end, { desc = "Harpoon: Select 2" })
+map("n", "<C-3>", function()
+  harpoon:list():select(3)
+end, { desc = "Harpoon: Select 3" })
+map("n", "<C-4>", function()
+  harpoon:list():select(4)
+end, { desc = "Harpoon: Select 4" })
 
 -- BetterTerm
 nomap("n", "<leader>h") -- Remove default horizontal term map
