@@ -211,6 +211,25 @@ map("n", "<leader>is", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "
 map("n", "<leader>il", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
 map("n", "<leader>iq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
 
+-- Telescope (include ignored files only when explicitly requested)
+local telescope_builtin = require "telescope.builtin"
+map("n", "<leader>fI", function()
+  telescope_builtin.find_files {
+    hidden = true,
+    no_ignore = true,
+    no_ignore_parent = true,
+    follow = true,
+  }
+end, { desc = "Find files (include ignored)" })
+
+map("n", "<leader>sI", function()
+  telescope_builtin.live_grep {
+    additional_args = function()
+      return { "--hidden", "--no-ignore", "--glob", "!.git/*" }
+    end,
+  }
+end, { desc = "Live grep (include ignored)" })
+
 -- Todo Comments
 map("n", "]t", function()
   require("todo-comments").jump_next()
