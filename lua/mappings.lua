@@ -206,7 +206,9 @@ map("c", "<c-s>", function()
   require("flash").toggle()
 end, { desc = "Toggle Flash Search" })
 
--- Gitsigns
+-- Git (Gitsigns & Lazygit)
+map("n", "<leader>lg", "<cmd>LazyGit<CR>", { desc = "LazyGit - Open terminal UI" })
+
 map("n", "<leader>hs", '<cmd>lua require"gitsigns".stage_hunk()<CR>', { desc = "Stage current hunk" })
 map("n", "<leader>hr", '<cmd>lua require"gitsigns".reset_hunk()<CR>', { desc = "Reset current hunk" })
 map("n", "<leader>hS", '<cmd>lua require"gitsigns".stage_buffer()<CR>', { desc = "Stage entire buffer" })
