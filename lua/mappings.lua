@@ -199,10 +199,6 @@ map("n", "<leader>td", '<cmd>lua require"gitsigns".toggle_deleted()<CR>', { desc
 map("v", "<leader>hs", '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', { desc = "Stage selected hunk" })
 map("v", "<leader>hr", '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', { desc = "Reset selected hunk" })
 
--- Markdown Preview
-map("n", "<leader>mp", "<Plug>MarkdownPreview", { desc = "Markdown preview start" })
-map("n", "<leader>ms", "<Plug>MarkdownPreviewStop", { desc = "Markdown preview stop" })
-map("n", "<leader>mt", "<Plug>MarkdownPreviewToggle", { desc = "Markdown preview toggle" })
 
 -- Trouble
 map("n", "<leader>ii", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
