@@ -157,15 +157,37 @@ map("i", "<C-k>", "<Plug>(copilot-accept-word)", { desc = "Accept Copilot word" 
 map("i", "<C-l>", "<Plug>(copilot-accept-line)", { desc = "Accept Copilot line" })
 
 -- Copilot Chat
-map("n", "<leader>zc", ":CopilotChat<CR>", { desc = "Chat with Copilot" })
-map("v", "<Leader>ze", ":CopilotChatExplain<CR>", { desc = "Explain Code" })
-map("v", "<Leader>zr", ":CopilotChatReview<CR>", { desc = "Review Code" })
-map("v", "<Leader>zf", ":CopilotChatFix<CR>", { desc = "Fix Code Issues" })
-map("v", "<Leader>zo", ":CopilotChatOptimize<CR>", { desc = "Optimize Code" })
-map("v", "<leader>zd", ":CopilotChatDocs<CR>", { desc = "Generate Docs" })
-map("v", "<leader>zt", ":CopilotChatTests<CR>", { desc = "Generate Tests" })
-map("n", "<Leader>zm", ":CopilotChatCommit<CR>", { desc = "Generate Commit Message" })
-map("v", "<leader>zs", ":CopilotChatCommit<CR>", { desc = "Generate Commit for Selection" })
+-- 1. The Core Toggle (Fastest way in and out of the main chat)
+map({ "n", "v" }, "<leader>cc", "<cmd>CopilotChatToggle<CR>", { desc = "CopilotChat - Toggle Chat Window" })
+
+-- 2. "Quick Chat" (The most efficient way to ask a fast question about the file without opening a huge window)
+map("n", "<leader>cq", function()
+  local input = vim.fn.input "Quick Chat: "
+  if input ~= "" then
+    vim.cmd("CopilotChatBuffer " .. input)
+  end
+end, { desc = "CopilotChat - Quick Chat (Buffer)" })
+
+-- Quick Chat for visual selections
+map("v", "<leader>cq", function()
+  local input = vim.fn.input "Quick Chat: "
+  if input ~= "" then
+    vim.cmd("CopilotChatVisual " .. input)
+  end
+end, { desc = "CopilotChat - Quick Chat (Selection)" })
+
+-- 3. Dedicated Actions (Normal and Visual modes)
+map({ "n", "v" }, "<leader>ce", "<cmd>CopilotChatExplain<CR>", { desc = "CopilotChat - Explain Code" })
+map({ "n", "v" }, "<leader>cf", "<cmd>CopilotChatFix<CR>", { desc = "CopilotChat - Fix Code" })
+map({ "n", "v" }, "<leader>co", "<cmd>CopilotChatOptimize<CR>", { desc = "CopilotChat - Optimize Code" })
+map({ "n", "v" }, "<leader>cd", "<cmd>CopilotChatDocs<CR>", { desc = "CopilotChat - Generate Docs" })
+map({ "n", "v" }, "<leader>ct", "<cmd>CopilotChatTests<CR>", { desc = "CopilotChat - Generate Tests" })
+map({ "n", "v" }, "<leader>cr", "<cmd>CopilotChatReview<CR>", { desc = "CopilotChat - Review Code" })
+map("n", "<leader>cm", "<cmd>CopilotChatCommit<CR>", { desc = "CopilotChat - Generate Commit Msg (Staged)" })
+
+-- 4. Useful Integrations
+map("n", "<leader>cM", "<cmd>CopilotChatModels<CR>", { desc = "CopilotChat - Select Model" })
+map("n", "<leader>cp", "<cmd>CopilotChatPrompts<CR>", { desc = "CopilotChat - Select Prompt" })
 
 -- Flash
 map({ "n", "x", "o" }, "s", function()
