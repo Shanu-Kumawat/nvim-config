@@ -95,3 +95,14 @@ autocmd("FileType", {
   end,
   desc = "Enable spell checking for writing buffers",
 })
+
+-- Custom command to install all configured treesitter parsers
+vim.api.nvim_create_user_command("TSSyncAll", function()
+  local opts = require("configs.treesitter")
+  if opts.ensure_installed and type(opts.ensure_installed) == "table" then
+    vim.cmd("TSInstall " .. table.concat(opts.ensure_installed, " "))
+    vim.notify("Triggered installation of all configured parsers!", vim.log.levels.INFO)
+  else
+    vim.notify("No parsers found in configs/treesitter.lua", vim.log.levels.WARN)
+  end
+end, { desc = "Install all treesitter parsers defined in configs/treesitter.lua" })
