@@ -78,7 +78,7 @@ map("n", "<leader>K", vim.lsp.buf.hover, { desc = "Show hover" })
 map("n", "<leader>sh", vim.lsp.buf.signature_help, { desc = "Show signature help" })
 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 map("n", "<leader>ra", function()
-  require("nvchad.lsp.renamer")()
+  require "nvchad.lsp.renamer"()
 end, { desc = "NvRenamer" })
 
 -- Workspace Folders
@@ -133,6 +133,9 @@ end, { desc = "Harpoon: Select 3" })
 map("n", "<C-4>", function()
   harpoon:list():select(4)
 end, { desc = "Harpoon: Select 4" })
+map("n", "<C-5>", function()
+  harpoon:list():select(5)
+end, { desc = "Harpoon: Select 5" })
 
 -- BetterTerm
 nomap("n", "<leader>h") -- Remove default horizontal term map
@@ -152,7 +155,12 @@ map("n", "<leader>rf", ":RunFile<CR>", { noremap = true, silent = false, desc = 
 map("n", "<leader>rp", ":RunProject<CR>", { noremap = true, silent = false, desc = "Run Project" })
 
 -- Copilot (Completion)
-map("i", "<C-J>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false, desc = "Accept Copilot suggestion" })
+map(
+  "i",
+  "<C-J>",
+  'copilot#Accept("\\<CR>")',
+  { expr = true, replace_keycodes = false, desc = "Accept Copilot suggestion" }
+)
 map("i", "<C-k>", "<Plug>(copilot-accept-word)", { desc = "Accept Copilot word" })
 map("i", "<C-l>", "<Plug>(copilot-accept-line)", { desc = "Accept Copilot line" })
 
@@ -216,13 +224,27 @@ map("n", "<leader>hu", '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>', { des
 map("n", "<leader>hR", '<cmd>lua require"gitsigns".reset_buffer()<CR>', { desc = "Reset entire buffer" })
 map("n", "<leader>hp", '<cmd>lua require"gitsigns".preview_hunk()<CR>', { desc = "Preview current hunk" })
 map("n", "<leader>hb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', { desc = "Blame current line (full)" })
-map("n", "<leader>tb", '<cmd>lua require"gitsigns".toggle_current_line_blame()<CR>', { desc = "Toggle current line blame" })
+map(
+  "n",
+  "<leader>tb",
+  '<cmd>lua require"gitsigns".toggle_current_line_blame()<CR>',
+  { desc = "Toggle current line blame" }
+)
 map("n", "<leader>hd", '<cmd>lua require"gitsigns".diffthis()<CR>', { desc = "Show diff of current file" })
 map("n", "<leader>hD", '<cmd>lua require"gitsigns".diffthis("~")<CR>', { desc = "Show diff with previous commit" })
 map("n", "<leader>td", '<cmd>lua require"gitsigns".toggle_deleted()<CR>', { desc = "Toggle deleted lines" })
-map("v", "<leader>hs", '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', { desc = "Stage selected hunk" })
-map("v", "<leader>hr", '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', { desc = "Reset selected hunk" })
-
+map(
+  "v",
+  "<leader>hs",
+  '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+  { desc = "Stage selected hunk" }
+)
+map(
+  "v",
+  "<leader>hr",
+  '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+  { desc = "Reset selected hunk" }
+)
 
 -- Trouble
 map("n", "<leader>ii", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
@@ -261,3 +283,27 @@ end, { desc = "Previous todo comment" })
 
 map("n", "<leader>it", "<cmd>TodoTrouble<cr>", { desc = "Todo (Trouble)" })
 map("n", "<leader>st", "<cmd>TodoTelescope<cr>", { desc = "Todo (Telescope)" })
+
+-- =============================================================================
+--  DAP & Go Mappings
+-- =============================================================================
+
+-- DAP mappings (general)
+map("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>", { desc = " DAP Add breakpoint at line" })
+map("n", "<leader>dus", function()
+  local widgets = require "dap.ui.widgets"
+  local sidebar = widgets.sidebar(widgets.scopes)
+  sidebar.open()
+end, { desc = "DAP Open debugging sidebar" })
+
+-- DAP Go mappings
+map("n", "<leader>dgt", function()
+  require("dap-go").debug_test()
+end, { desc = "DAP Debug go test" })
+map("n", "<leader>dgl", function()
+  require("dap-go").debug_last()
+end, { desc = "DAP Debug last go test" })
+
+-- Gopher mappings
+map("n", "<leader>gsj", "<cmd> GoTagAdd json <CR>", { desc = "Gopher Add json struct tags" })
+map("n", "<leader>gsy", "<cmd> GoTagAdd yaml <CR>", { desc = "Gopher Add yaml struct tags" })

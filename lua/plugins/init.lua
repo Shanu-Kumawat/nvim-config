@@ -1,5 +1,7 @@
 return {
 
+  { import = "nvchad.blink.lazyspec" },
+
   {
     "nvim-treesitter/nvim-treesitter",
     opts = require "configs.treesitter",
@@ -173,6 +175,43 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require "configs.harpoon"
+    end,
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+  },
+
+  {
+    "leoluz/nvim-dap-go",
+    ft = "go",
+    dependencies = "mfussenegger/nvim-dap",
+    config = function(_, opts)
+      require("dap-go").setup(opts)
+    end,
+  },
+
+  {
+    "olexsmir/gopher.nvim",
+    ft = "go",
+    config = function(_, opts)
+      require("gopher").setup(opts)
+    end,
+    build = function()
+      vim.cmd [[silent! GoInstallDeps]]
+    end,
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
+    ft = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+    },
+    config = function()
+      require("nvim-ts-autotag").setup()
     end,
   },
 }

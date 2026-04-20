@@ -2,7 +2,7 @@ require("code_runner").setup {
   mode = "better_term",
   better_term = {
     clean = true,
-    number = 1,
+    number = 0,
     init = nil,
   },
   filetype = {

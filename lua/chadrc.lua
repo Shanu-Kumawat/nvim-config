@@ -33,15 +33,28 @@ M.mason = {
     "json-lsp",
     "html-lsp",
     "css-lsp",
-    "emmet-ls",
+    "gopls",
+    "pyright",
+    "ruff",
+    "tailwindcss-language-server",
+    "typescript-language-server",
+    "emmet-language-server",
+    "marksman",
+    "expert",
+    "taplo",
 
     -- Formatters
     "stylua",
-    "prettier",
     "shfmt",
+    "gofumpt",
+    "golines",
+    "goimports-reviser",
+    "black",
+    "prettierd",
+    "djlint",
 
-    -- Linters
-    "eslint-lsp",
+    -- DAP
+    "delve",
   },
 }
 

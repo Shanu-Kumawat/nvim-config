@@ -1,5 +1,4 @@
 return {
-  model = "gemini-3.1-pro-preview",
   Rename = {
     prompt = "Please rename the variable correctly in given selection based on context",
     selection = function(source)

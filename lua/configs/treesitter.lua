@@ -8,6 +8,13 @@ local options = {
     "vim",
     "vimdoc",
 
+    -- Go
+    "go",
+    "gomod",
+    "gowork",
+    "gosum",
+    "gotmpl",
+
     -- Web
     "html",
     "css",
@@ -20,6 +27,7 @@ local options = {
     "markdown",
     "markdown_inline",
     "yaml",
+    "toml",
 
     -- Programming
     "python",
@@ -38,6 +46,11 @@ local options = {
     "query",
     "printf",
     "luadoc",
+
+    -- Elixir
+    "elixir",
+    "heex",
+    "eex",
   },
   incremental_selection = {
     enable = true,
