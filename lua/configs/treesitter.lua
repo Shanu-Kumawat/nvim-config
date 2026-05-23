@@ -51,6 +51,9 @@ local options = {
     "elixir",
     "heex",
     "eex",
+
+    -- Flutter
+    "dart",
   },
   incremental_selection = {
     enable = true,
